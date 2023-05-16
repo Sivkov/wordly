@@ -11,3 +11,36 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.letter {
+  width: 75px;
+  height: 100px;
+  border: 1px solid black;
+  margin: 5px;
+
+}
+
+.letter_row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+
+.cows {
+  background-color: antiquewhite;
+}
+
+.bulls {
+  background-color: rgb(25, 231, 43);
+}
+

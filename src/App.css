@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.cow {
+  background-color: antiquewhite;
+}
+
+.bull {
+  background-color: rgb(25, 231, 43);
+}
+
