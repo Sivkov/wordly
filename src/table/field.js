@@ -5,12 +5,8 @@ import constants from '../constants/constants';
 
 const Field = () => {
   const [wordArray, setWordArray] = useState([
-    {word:'пилот', bulls:[2,4] , cows:[1,2]},
-    {word:'пилот', bulls:[2,4] , cows:[1,2]},
-    {word:'пилот', bulls:[2,4] , cows:[1,2]},
-    {word:'пилот', bulls:[2,4] , cows:[1,2]},
-    {word:'пилот', bulls:[2,4] , cows:[1,2]},
-    {word:'пилот', bulls:[2,4] , cows:[1,2]}
+    {word:['п', 'и', 'п', 'п', 'а'], cows:[1,2,4], bulls:[2,4]},
+    {word:['', '', '', '', ''], bulls:[] , cows:[]},
   ]);
 
   return (

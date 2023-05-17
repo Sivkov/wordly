@@ -5,7 +5,7 @@ import constants from '../constants/constants';
 const Row = ({ word }) => {
   return (
     <div className="letter_row">
-      {word.word.split('').map((letter, letterIndex) => (
+      {word.word.map((letter, letterIndex) => (
         <Letter
           key={letterIndex}
           content={letter}
