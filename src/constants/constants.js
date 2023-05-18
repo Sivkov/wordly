@@ -2,7 +2,7 @@
 export default {
     MAX_STEP: 10,
     LETTERS:5,
-    ATTEMPTS:6,
+    ATTEMPTS:5,
     STEP:0
   };
   
