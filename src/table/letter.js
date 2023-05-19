@@ -6,9 +6,12 @@ const Letter = ({ content, index, bulls, cows }) => {
   const hasBulls = bulls.includes(index);
 
   let classNames = 'letter';
+  if (content.length) {
+    classNames += ' used';
+  }
   if (hasCows) {
     classNames += ' cows';
-  }
+  } 
   if (hasBulls) {
     classNames += ' bulls';
   }

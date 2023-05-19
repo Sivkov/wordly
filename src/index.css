@@ -39,6 +39,9 @@ code {
 
 }
 
+.used {
+  background-color: rgb(92, 90, 86);
+}
 
 .cows {
   background-color: antiquewhite;
