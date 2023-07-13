@@ -1,22 +1,21 @@
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useDispatch } from '@reduxjs/toolkit';
-//import { setStarships } from './store/starship/starships-reducer';
 import Field from './table/field';
-import KeyPress from './table/keyPress.js';
-
-
-import constants from './constants/constants';
-
+import Win from './table/win.js';
+import Winner from './scripts/confetti';
+ 
 
 const App = () => {
   //const dispatch = useDispatch();
+  Winner()
   return (
     <div className="App">
         <Field />
-        <KeyPress />
+        <Win />
      </div>
   );
+  
 }
 
 export default App;
