@@ -1,6 +1,14 @@
 import React from 'react';
 
-const Win = () => {
+const Win = (arr) => {
+ 	const detectWin =()=>{
+		arr.ATTEMPTS.forEach(element => {
+			if (element.bulls.length == 5){
+				console.log ('win')
+ 			}
+		});
+
+	}
 
 	return (
 		<div>
