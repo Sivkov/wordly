@@ -17,9 +17,13 @@ const Field = () => {
 
 	const initGameStatus ='ON'
 
+	const getWord = () =>  {
+		return 'ТУНЕЦ'
+	}
+
 	const [wordArray, setWordArray] = useState({
 		ATTEMPTS: initialWordArray,
-		KEYWORD: "ТУНЕЦ",
+		KEYWORD: getWord(),
 		GAME: initGameStatus
 	});
 
@@ -27,7 +31,7 @@ const Field = () => {
 		console.log ('handleWordArrayClick '+ action)
 		if (action === 'new') {
 			console.log ("***New")
-			setWordArray({ ATTEMPTS: initialWordArray, KEYWORD: "ТУНЕЦ", GAME: 'ON' });
+			setWordArray({ ATTEMPTS: initialWordArray, KEYWORD: getWord(), GAME: initGameStatus });
 
 		} else if (action === 'addLetter') {
 			console.log ("***Add letter")
@@ -78,6 +82,10 @@ const Field = () => {
 			const emptyWordIndex = updatedWordArray.ATTEMPTS.findIndex(
 				(word) => word.status === 'current'
 			);
+			if ( updatedWordArray.ATTEMPTS[emptyWordIndex].word.includes('') ) {
+				console.log ("Empty letters")
+				return
+			}
 			let bulls=''
 			if (emptyWordIndex !== -1 && updatedWordArray.GAME === "ON") {
 				bulls = getBulls(updatedWordArray.ATTEMPTS[emptyWordIndex].word) 
@@ -127,7 +135,6 @@ const Field = () => {
 				res.push(ind)
 			}
 		})
-	 
 		return res;
 	};
 /*
@@ -153,6 +160,7 @@ const Field = () => {
 	  const handleKeyPress = useCallback(
 		(event) => {
 		  const keyPressed = event.key.toLowerCase();
+		  console.log (keyPressed)
 		  if (/^[а-яё]$/.test(keyPressed) && wordArray.GAME !== 'WIN') {
 			// Handle the key press event
 			handleWordArrayClick('addLetter', keyPressed)
@@ -164,10 +172,9 @@ const Field = () => {
 		  } else if (keyPressed === "enter") {
 			// Handle the enter key press event
 			handleWordArrayClick('submit')
+		  } 
 
-		  }
-		},
-		[wordArray.GAME]
+		},[wordArray]
 	  );
 	  
 	  useEffect(() => {
@@ -175,16 +182,15 @@ const Field = () => {
 		return () => {
 		  window.removeEventListener('keydown', handleKeyPress);
 		};
-	  }, [handleKeyPress]);
+	  }); 
 	  
-	  
- 
 
 	return (
 		<div>
-			<button onClick={() => handleWordArrayClick('new')}>Restart</button>
-			<button onClick={() => handleWordArrayClick('submit')}>Submit</button>
-
+			<div className='d-flex justify-content-center'>
+				<div className="btn btn-info m-4" onClick={() => handleWordArrayClick('new')}>Restart</div>
+				<div className="btn btn-info m-4" onClick={() => handleWordArrayClick('submit')}>Submit</div>
+			</div>
 			{wordArray.ATTEMPTS.map((word, index) => (
 				<Row key={index} word={word} />
 			))}
