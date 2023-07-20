@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Row from './row';
 import Win from './win';
 import constants from '../constants/constants';
-//import Winner from '../scripts/confetti';
+import RussianKeyboard from '../table/russianKeyboard';
 
 
 const Field = () => {
@@ -18,7 +18,7 @@ const Field = () => {
 	const initGameStatus ='ON'
 
 	const getWord = () =>  {
-		return 'ТУНЕЦ'
+		return 'ПИКАП'
 	}
 
 	const [wordArray, setWordArray] = useState({
@@ -107,11 +107,13 @@ const Field = () => {
 				if (bulls.length  ===  5 ) {
  					updatedWordArray.GAME = 'WIN'
 					updatedWordArray.KEYWORD = 'КОНЕЦ'
-					console.log ("конец!!!!!")
-
+					alert ("конец!!!!!")
 				}
 			}
+
+
 			console.log (updatedWordArray);
+			markUsed()
 			setWordArray(updatedWordArray);
 		} 
 	};
@@ -124,7 +126,6 @@ const Field = () => {
 				res.push(ind)
 			}
 		})
-
 		return res;
 	};
 
@@ -137,27 +138,24 @@ const Field = () => {
 		})
 		return res;
 	};
-/*
-	const handleKeyPress = (event) => {
-		const keyPressed = event.key.toLowerCase();
-		if (/^[а-яё]$/.test(keyPressed) && wordArray.GAME !== 'WIN') {
-			handleWordArrayClick('addLetter', keyPressed)
-		} else if (keyPressed === "delete" || keyPressed === "backspace") {
-			handleWordArrayClick('deleteLetter', keyPressed)
-		} else if (keyPressed === "enter") {
-			console.log (keyPressed)
-			handleWordArrayClick('submit')
-		}
-	};
 
-	useEffect(() => {
-		window.addEventListener('keydown', handleKeyPress);
-		return () => {
-		  window.removeEventListener('keydown', handleKeyPress);
-		};
-	  }, [handleKeyPress]);*/
+	const markUsed =() => {
+		let used=[]
+		wordArray.ATTEMPTS.map(a => {
+			used=[ ...used, ...a.word]
+		})
+		document.querySelectorAll('.keyboard-key').forEach((item)=>{
+			let letter = item.innerHTML.toUpperCase()
+			if ( used.includes(letter)){
+				item.classList.add("used")
+				if ( wordArray.KEYWORD.includes(letter)) {
+					item.classList.add("usefull")
+				}
+			}
+		})
+	}
 
-	  const handleKeyPress = useCallback(
+    const handleKeyPress = useCallback(
 		(event) => {
 		  const keyPressed = event.key.toLowerCase();
 		  console.log (keyPressed)
@@ -194,6 +192,9 @@ const Field = () => {
 			{wordArray.ATTEMPTS.map((word, index) => (
 				<Row key={index} word={word} />
 			))}
+			<div className='mt-2'>
+			<RussianKeyboard handleWordArrayClick={handleWordArrayClick} />
+			</div>			
 		</div>
 	);
 };
