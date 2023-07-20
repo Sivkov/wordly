@@ -106,14 +106,12 @@ const Field = () => {
 				}
 				if (bulls.length  ===  5 ) {
  					updatedWordArray.GAME = 'WIN'
-					updatedWordArray.KEYWORD = 'КОНЕЦ'
-					alert ("конец!!!!!")
+ 					alert ("конец!!!!!")
 				}
 			}
 
 
 			console.log (updatedWordArray);
-			markUsed()
 			setWordArray(updatedWordArray);
 		} 
 	};
@@ -139,37 +137,18 @@ const Field = () => {
 		return res;
 	};
 
-	const markUsed =() => {
-		let used=[]
-		wordArray.ATTEMPTS.map(a => {
-			used=[ ...used, ...a.word]
-		})
-		document.querySelectorAll('.keyboard-key').forEach((item)=>{
-			let letter = item.innerHTML.toUpperCase()
-			if ( used.includes(letter)){
-				item.classList.add("used")
-				if ( wordArray.KEYWORD.includes(letter)) {
-					item.classList.add("usefull")
-				}
-			}
-		})
-	}
-
     const handleKeyPress = useCallback(
 		(event) => {
 		  const keyPressed = event.key.toLowerCase();
 		  console.log (keyPressed)
 		  if (/^[а-яё]$/.test(keyPressed) && wordArray.GAME !== 'WIN') {
-			// Handle the key press event
-			handleWordArrayClick('addLetter', keyPressed)
+ 			handleWordArrayClick('addLetter', keyPressed)
 
 		  } else if (keyPressed === "delete" || keyPressed === "backspace") {
-			// Handle the delete/backspace key press event
-			handleWordArrayClick('deleteLetter', keyPressed)
+ 			handleWordArrayClick('deleteLetter', keyPressed)
 
 		  } else if (keyPressed === "enter") {
-			// Handle the enter key press event
-			handleWordArrayClick('submit')
+ 			handleWordArrayClick('submit')
 		  } 
 
 		},[wordArray]
@@ -193,7 +172,7 @@ const Field = () => {
 				<Row key={index} word={word} />
 			))}
 			<div className='mt-2'>
-			<RussianKeyboard handleWordArrayClick={handleWordArrayClick} />
+			<RussianKeyboard wordArray={wordArray}  handleWordArrayClick={handleWordArrayClick} />
 			</div>			
 		</div>
 	);

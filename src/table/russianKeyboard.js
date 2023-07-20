@@ -1,7 +1,21 @@
 import React from 'react';
 
-const RussianKeyboard = ({ handleWordArrayClick }) => {
+const RussianKeyboard = ({ wordArray, handleWordArrayClick }) => {
   const russianLetters = Array.from({ length: 32 }, (_, index) => String.fromCharCode(1040 + index));
+  const rClass =(letter)=>{
+    let used=[]
+    let lClass= 'keyboard-key'
+    wordArray.ATTEMPTS.forEach(element => {
+        if ( element.status === 'used') {
+          used=[...used, ...element.word]
+        } 
+    });
+    if ( used.includes(letter)) {
+      lClass+=' used'
+      if (wordArray.KEYWORD.includes( letter) )  lClass+=' usefull'
+    }
+    return lClass
+  }
 
   return (
     <div>
@@ -9,7 +23,7 @@ const RussianKeyboard = ({ handleWordArrayClick }) => {
         {russianLetters.map((letter, index) => (
           <button
             key={index}
-            className="keyboard-key"
+            className={rClass(letter)}
             onClick={() => handleWordArrayClick('addLetter', letter)}
           >
             {letter}
