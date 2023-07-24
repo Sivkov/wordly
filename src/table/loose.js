@@ -1,17 +1,17 @@
 import React from 'react';
 
-const Win = ({ wordArray }) => {
+const Loose = ({ wordArray }) => {
   return (
     <div>
-      {wordArray.GAME == 'WIN' && (
+      {wordArray.GAME == 'LOOSE' && (
         <div>
           {/* Ваш компонент или содержимое, которое будет отображено только при wordArray.GAME !== 'WIN' */}
-		  WIN!!
+		  Loose!!
         </div>
       )}
     </div>
   );
 };
 
-export default Win;
+export default Loose;
 

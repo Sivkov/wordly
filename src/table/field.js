@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Row from './row';
 import Win from './win';
+import Loose from './loose';
 import constants from '../constants/constants';
 import RussianKeyboard from '../table/russianKeyboard';
 
@@ -82,6 +83,8 @@ const Field = () => {
 			const emptyWordIndex = updatedWordArray.ATTEMPTS.findIndex(
 				(word) => word.status === 'current'
 			);
+
+
 			if ( updatedWordArray.ATTEMPTS[emptyWordIndex].word.includes('') ) {
 				console.log ("Empty letters")
 				return
@@ -106,7 +109,8 @@ const Field = () => {
 				}
 				if (bulls.length  ===  5 ) {
  					updatedWordArray.GAME = 'WIN'
- 					alert ("конец!!!!!")
+ 				} else if ( updatedWordArray.ATTEMPTS[constants.ATTEMPTS-1].status === 'used' ) {
+					updatedWordArray.GAME = 'LOOSE'
 				}
 			}
 
@@ -173,6 +177,9 @@ const Field = () => {
 			))}
 			<div className='mt-2'>
 			<RussianKeyboard wordArray={wordArray}  handleWordArrayClick={handleWordArrayClick} />
+			<Win wordArray={wordArray} />
+			<Loose wordArray={wordArray} />
+
 			</div>			
 		</div>
 	);
