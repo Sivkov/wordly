@@ -1,10 +1,15 @@
 import React from 'react';
 import Letter from './letter';
-import constants from '../constants/constants';
 
 const Row = ({ word }) => {
+
+ let classNames="letter_row"
+ if (word.status === 'used') {
+  classNames+=" usedAttempt"
+ }
+
   return (
-    <div className="letter_row">
+    <div className={classNames}>
       {word.word.map((letter, letterIndex) => (
         <Letter
           key={letterIndex}

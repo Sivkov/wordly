@@ -1,12 +1,18 @@
 import React from 'react';
 
-const Win = ({ wordArray }) => {
+const Win = ({ wordArray, handleWordArrayClick }) => {
   return (
     <div>
-      {wordArray.GAME == 'WIN' && (
+      {wordArray.GAME === 'WIN' && (
         <div>
-          {/* Ваш компонент или содержимое, которое будет отображено только при wordArray.GAME !== 'WIN' */}
-		  WIN!!
+        <div className="gameStatus_under"></div>
+        <div className="gameStatus">
+          <div className='gameStatus_wrapper'>
+          <h1>YOU WIN!</h1>
+				  <div className="btn btn-info m-4" onClick={() => handleWordArrayClick('new')}>Restart</div>
+          </div>
+          
+        </div>
         </div>
       )}
     </div>

@@ -121,3 +121,36 @@ code {
 .btn_del {
   width: 120px;
 } 
+
+.gameStatus {
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #46b8da;
+}
+
+.gameStatus_under {
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  background-color: darkgrey;
+}
+
+.gameStatus_wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.letter_row.usedAttempt .letter {
+  opacity: 0.75;
+}

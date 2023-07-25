@@ -177,8 +177,8 @@ const Field = () => {
 			))}
 			<div className='mt-2'>
 			<RussianKeyboard wordArray={wordArray}  handleWordArrayClick={handleWordArrayClick} />
-			<Win wordArray={wordArray} />
-			<Loose wordArray={wordArray} />
+			<Win wordArray={wordArray} handleWordArrayClick={handleWordArrayClick}/>
+			<Loose wordArray={wordArray} handleWordArrayClick={handleWordArrayClick}/>
 
 			</div>			
 		</div>

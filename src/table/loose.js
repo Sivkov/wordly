@@ -1,12 +1,17 @@
 import React from 'react';
 
-const Loose = ({ wordArray }) => {
+const Loose = ({ wordArray, handleWordArrayClick }) => {
   return (
     <div>
-      {wordArray.GAME == 'LOOSE' && (
+      {wordArray.GAME === 'LOOSE' && (
         <div>
-          {/* Ваш компонент или содержимое, которое будет отображено только при wordArray.GAME !== 'WIN' */}
-		  Loose!!
+        <div className="gameStatus_under"></div>
+        <div className="gameStatus">
+          <div className='gameStatus_wrapper'>
+          <h1>YOU LOOSE! TRY AGAIN!</h1>
+				  <div className="btn btn-info m-4" onClick={() => handleWordArrayClick('new')}>Restart</div>
+          </div>
+        </div>
         </div>
       )}
     </div>
@@ -14,4 +19,3 @@ const Loose = ({ wordArray }) => {
 };
 
 export default Loose;
-
