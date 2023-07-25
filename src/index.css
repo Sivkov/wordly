@@ -40,19 +40,16 @@ code {
 
 }
 
-.used {
-  background-color: rgb(92, 90, 86);
+
+.usedAttempt .letter {
+  background-color: rgb(97, 97, 97);
 }
 
-.usefull {
-  background-color: rgb(82, 173, 82);
-}
-
-.cows {
+.usedAttempt  .cows {
   background-color: antiquewhite;
 }
 
-.bulls {
+.usedAttempt  .bulls {
   background-color: rgb(25, 231, 43);
 }
 
@@ -117,6 +114,20 @@ code {
   outline: none;
   background-color: #f0f0f0;
 }
+
+.used {
+  background-color: rgb(97, 97, 97);
+}
+
+.usefull {
+  background-color: #f0f0f0;
+}
+
+
+.usefullOnPlace {
+  background-color: rgb(82, 173, 82);
+}
+
 
 .btn_del {
   width: 120px;
