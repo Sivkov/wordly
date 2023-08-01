@@ -5,8 +5,28 @@ import Loose from './loose';
 import constants from '../constants/constants';
 import RussianKeyboard from '../table/russianKeyboard';
 
-
+const axios = require('axios');
+ 
 const Field = () => {
+  const [KEYWORD, setKEYWORD] = useState('');
+  const [GAMESTATUS, setGAMESTATUS] = useState('new');
+
+  useEffect(() => {
+    if (!KEYWORD || GAMESTATUS === 'new') {
+      const url = `http://localhost:3000/get_word/${constants.LETTERS}`;
+      axios
+        .get(url)
+        .then(response => {
+          setKEYWORD(response.data.word);
+          console.log('Word is:', response.data.word);
+          setGAMESTATUS('fetched');
+        })
+        .catch(error => {
+          console.error('Error:', error.message);
+        });
+    }
+  }, [KEYWORD, GAMESTATUS]);
+
 	const initialWordArray = Array.from({ length: constants.ATTEMPTS }, (i, ind) => {
 		return {
 		  word: Array.from({ length: constants.LETTERS }, () => ''),
@@ -17,22 +37,40 @@ const Field = () => {
 	  });
 
 	const initGameStatus ='ON'
-
-	const getWord = () =>  {
-		return 'ПИКАП'
-	}
-
 	const [wordArray, setWordArray] = useState({
 		ATTEMPTS: initialWordArray,
-		KEYWORD: getWord(),
+		KEYWORD: KEYWORD,
 		GAME: initGameStatus
 	});
+
+	useEffect(() => {
+		if (!wordArray.KEYWORD || wordArray.GAME === 'new') {
+		  getWord();
+		}
+	  }, [wordArray.GAME, wordArray.KEYWORD]);
+	
+	  const getWord = () => {
+		const url = `http://localhost:3000/get_word/${constants.LETTERS}`;
+		axios
+		.get(url)
+		.then((response) => {
+			const newKeyword = response.data.word.toUpperCase();
+			console.log('Word is: ' + newKeyword);
+			setWordArray((prev) => ({ ...prev, KEYWORD: newKeyword, GAME: 'ON' }));
+		})
+		.catch((error) => {
+			console.error('Error:', error.message);
+		});
+	};
+	
+
 
 	const handleWordArrayClick = (action , keyPressed = '') => {
 		console.log ('handleWordArrayClick '+ action)
 		if (action === 'new') {
 			console.log ("***New")
-			setWordArray({ ATTEMPTS: initialWordArray, KEYWORD: getWord(), GAME: initGameStatus });
+			getWord()
+			setWordArray({ ATTEMPTS: initialWordArray, KEYWORD: KEYWORD, GAME: initGameStatus });
 
 		} else if (action === 'addLetter') {
 			console.log ("***Add letter")
