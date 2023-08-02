@@ -111,10 +111,9 @@ code {
   cursor: pointer;
 }
 
-.keyboard-key:focus {
+/*.keyboard-key:focus {
   outline: none;
-  background-color: #f0f0f0;
-}
+ }*/
 
 .used {
   background-color: rgb(97, 97, 97);
@@ -124,16 +123,15 @@ code {
   background-color: rgb(82, 173, 82);
 }
 
-
 .usefullOnPlace {
   background-color: rgb(82, 173, 82);
 }
-
 
 .btn_del {
   width: 120px;
 } 
 
+.noWord,
 .gameStatus {
   position: absolute;
   top:0;
@@ -147,6 +145,7 @@ code {
   color: #46b8da;
 }
 
+.noWord_under_under,
 .gameStatus_under {
   position: absolute;
   top:0;
@@ -157,6 +156,7 @@ code {
   background-color: darkgrey;
 }
 
+.noWord_wrapper,
 .gameStatus_wrapper {
   display: flex;
   justify-content: center;

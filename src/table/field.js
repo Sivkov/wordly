@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Row from './row';
 import Win from './win';
 import Loose from './loose';
+import Noword from './noword';
 import constants from '../constants/constants';
 import RussianKeyboard from '../table/russianKeyboard';
 
@@ -40,7 +41,8 @@ const Field = () => {
 	const [wordArray, setWordArray] = useState({
 		ATTEMPTS: initialWordArray,
 		KEYWORD: KEYWORD,
-		GAME: initGameStatus
+		GAME: initGameStatus,
+		MISTAKE:false
 	});
 
 	useEffect(() => {
@@ -116,53 +118,73 @@ const Field = () => {
 			}
 
 		} else if (action === 'submit') {
+
 			console.log("***submit")
 			const updatedWordArray = { ...wordArray };
 			const emptyWordIndex = updatedWordArray.ATTEMPTS.findIndex(
 				(word) => word.status === 'current'
 			);
 
-
 			if ( updatedWordArray.ATTEMPTS[emptyWordIndex].word.includes('') ) {
 				console.log ("Empty letters")
 				return
 			}
-			let bulls=''
-			if (emptyWordIndex !== -1 && updatedWordArray.GAME === "ON") {
-				bulls = getBulls(updatedWordArray.ATTEMPTS[emptyWordIndex].word) 
-				updatedWordArray.ATTEMPTS[emptyWordIndex] = {
-					word: updatedWordArray.ATTEMPTS[emptyWordIndex].word,
-					cows: getCows(updatedWordArray.ATTEMPTS[emptyWordIndex].word),
-					bulls: bulls,
-					status: 'used'
-				};
+ 			let check = updatedWordArray.ATTEMPTS[emptyWordIndex].word.join('').toLowerCase()
+			const url = `http://localhost:3000/check_word/${check}`;
+			axios
+			.get(url)
+			.then((response) => {
+ 				if (response.data.word) {
+					let bulls=''
+					if (emptyWordIndex !== -1 && updatedWordArray.GAME === "ON") {
+						bulls = getBulls(updatedWordArray.ATTEMPTS[emptyWordIndex].word) 
+						updatedWordArray.ATTEMPTS[emptyWordIndex] = {
+							word: updatedWordArray.ATTEMPTS[emptyWordIndex].word,
+							cows: getCows(updatedWordArray.ATTEMPTS[emptyWordIndex].word),
+							bulls: bulls,
+							status: 'used'
+						};
+		
+						if (emptyWordIndex < constants.ATTEMPTS - 1 && updatedWordArray.GAME === "ON") {
+							updatedWordArray.ATTEMPTS[emptyWordIndex + 1] = {
+								word: Array.from({ length: constants.LETTERS }, () => ''),
+								cows: [],
+								bulls: [],
+								status: 'current'
+							};
+						}
+						if (bulls.length  ===  5 ) {
+							 updatedWordArray.GAME = 'WIN'
+						 } else if ( updatedWordArray.ATTEMPTS[constants.ATTEMPTS-1].status === 'used' ) {
+							updatedWordArray.GAME = 'LOOSE'
+						}
+					}				
 
-				if (emptyWordIndex < constants.ATTEMPTS - 1 && updatedWordArray.GAME === "ON") {
-					updatedWordArray.ATTEMPTS[emptyWordIndex + 1] = {
-						word: Array.from({ length: constants.LETTERS }, () => ''),
-						cows: [],
-						bulls: [],
-						status: 'current'
-					};
+				} else {
+					updatedWordArray.ATTEMPTS[emptyWordIndex].word=Array.from({ length: constants.LETTERS }, () => '')
+					updatedWordArray.MISTAKE=true
 				}
-				if (bulls.length  ===  5 ) {
- 					updatedWordArray.GAME = 'WIN'
- 				} else if ( updatedWordArray.ATTEMPTS[constants.ATTEMPTS-1].status === 'used' ) {
-					updatedWordArray.GAME = 'LOOSE'
-				}
-			}
 
+				console.log (updatedWordArray);
+				setWordArray(updatedWordArray);			
+				
+			})
+			.catch((error) => {
+				console.log (error)			
+			});
+		} else if (action === 'noMistake') {
+			const updatedWordArray = { ...wordArray };
+			updatedWordArray.MISTAKE=false
+			setWordArray(updatedWordArray);			
 
-			console.log (updatedWordArray);
-			setWordArray(updatedWordArray);
-		} 
+		}
+
 	};
 
 	const getCows = (word) => {
 		let res = []
  		word.map((letter, ind) => {
-			if (wordArray.KEYWORD.includes(letter.toUpperCase())
-			) {
+			if (wordArray.KEYWORD.includes(letter.toUpperCase())) {
 				res.push(ind)
 			}
 		})
@@ -208,8 +230,7 @@ const Field = () => {
 		<div>
 			<div className='d-flex justify-content-center'>
 				<div className="btn btn-info m-4" onClick={() => handleWordArrayClick('new')}>Restart</div>
-				<div className="btn btn-info m-4" onClick={() => handleWordArrayClick('submit')}>Submit</div>
-			</div>
+ 			</div>
 			{wordArray.ATTEMPTS.map((word, index) => (
 				<Row key={index} word={word} />
 			))}
@@ -217,6 +238,8 @@ const Field = () => {
 			<RussianKeyboard wordArray={wordArray}  handleWordArrayClick={handleWordArrayClick} />
 			<Win wordArray={wordArray} handleWordArrayClick={handleWordArrayClick}/>
 			<Loose wordArray={wordArray} handleWordArrayClick={handleWordArrayClick}/>
+			<Noword wordArray={wordArray} handleWordArrayClick={handleWordArrayClick}/>
+
 
 			</div>			
 		</div>
