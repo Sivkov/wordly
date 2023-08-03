@@ -206,7 +206,7 @@ const Field = () => {
 		  const keyPressed = event.key.toLowerCase();
 		  console.log (keyPressed)
 		  if (/^[а-яё]$/.test(keyPressed) && wordArray.GAME !== 'WIN') {
- 			handleWordArrayClick('addLetter', keyPressed)
+ 			handleWordArrayClick('addLetter', keyPressed.toUpperCase())
 
 		  } else if (keyPressed === "delete" || keyPressed === "backspace") {
  			handleWordArrayClick('deleteLetter', keyPressed)

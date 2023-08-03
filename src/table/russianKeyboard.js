@@ -12,7 +12,7 @@ const RussianKeyboard = ({ wordArray, handleWordArrayClick }) => {
     });
 
     used = [...new Set(used)];
-    console.log(used)
+    //console.log(used)
 
 
     if (used.includes(letter)) {
