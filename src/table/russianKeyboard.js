@@ -19,6 +19,18 @@ const RussianKeyboard = ({ wordArray, handleWordArrayClick }) => {
       lClass += ' used'
       if (wordArray.KEYWORD.includes(letter)) lClass += ' usefull'
     }
+
+    wordArray.ATTEMPTS.forEach(element => {
+      if (element.status === 'used') {
+        let lIndex = wordArray.KEYWORD.indexOf(letter)
+        if ( lIndex !== -1 && element.word[lIndex] === letter) {
+          lClass += ' usefullOnPlace'
+        }
+      }
+    });
+
+
+
     return lClass
   }
 

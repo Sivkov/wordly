@@ -14,7 +14,7 @@ const Field = () => {
 
   useEffect(() => {
     if (!KEYWORD || GAMESTATUS === 'new') {
-      const url = `http://localhost:3000/get_word/${constants.LETTERS}`;
+      const url = `${constants.URL}/get_word/${constants.LETTERS}`;
       axios
         .get(url)
         .then(response => {
@@ -52,7 +52,7 @@ const Field = () => {
 	  }, [wordArray.GAME, wordArray.KEYWORD]);
 	
 	  const getWord = () => {
-		const url = `http://localhost:3000/get_word/${constants.LETTERS}`;
+		const url = `${constants.URL}/get_word/${constants.LETTERS}`;
 		axios
 		.get(url)
 		.then((response) => {
@@ -130,7 +130,7 @@ const Field = () => {
 				return
 			}
  			let check = updatedWordArray.ATTEMPTS[emptyWordIndex].word.join('').toLowerCase()
-			const url = `http://localhost:3000/check_word/${check}`;
+			const url = `${constants.URL}/check_word/${check}`;
 			axios
 			.get(url)
 			.then((response) => {
