@@ -2,7 +2,7 @@
 export default {
     MAX_STEP: 10,
     LETTERS:5,
-    ATTEMPTS:7,
+    ATTEMPTS:5,
     STEP:0,
     URL:"http://localhost:3030"
   };

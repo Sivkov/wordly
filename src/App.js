@@ -8,7 +8,16 @@ const App = () => {
   //const dispatch = useDispatch();
   return (
     <div className="App">
-        <Field />        
+        <Field />
+        <div className="cardLetter">
+          <div className="cardLetter-side front">
+            <div>Front Side</div>
+          </div>
+          <div className="cardLetter-side back">
+            <div>Back Side</div>
+          </div>
+        </div> 
+               
      </div>
   );
   

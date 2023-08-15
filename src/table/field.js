@@ -12,7 +12,7 @@ const Field = () => {
   const [KEYWORD, setKEYWORD] = useState('');
   const [GAMESTATUS, setGAMESTATUS] = useState('new');
 
-  useEffect(() => {
+ /* useEffect(() => {
     if (!KEYWORD || GAMESTATUS === 'new') {
       const url = `${constants.URL}/get_word/${constants.LETTERS}`;
       axios
@@ -26,7 +26,7 @@ const Field = () => {
           console.error('Error:', error.message);
         });
     }
-  }, [KEYWORD, GAMESTATUS]);
+  }, [KEYWORD, GAMESTATUS]);*/
 
 	const initialWordArray = Array.from({ length: constants.ATTEMPTS }, (i, ind) => {
 		return {
@@ -71,7 +71,7 @@ const Field = () => {
 		console.log ('handleWordArrayClick '+ action)
 		if (action === 'new') {
 			console.log ("***New")
-			getWord()
+			//getWord()
 			setWordArray({ ATTEMPTS: initialWordArray, KEYWORD: KEYWORD, GAME: initGameStatus });
 
 		} else if (action === 'addLetter') {
