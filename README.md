@@ -2,3 +2,5 @@
 ###### (with blackjacks and ... new features)
 * Stack:
   * React
+  * Hooks
+  * Axios
