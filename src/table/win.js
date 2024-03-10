@@ -8,7 +8,7 @@ const Win = ({ wordArray, handleWordArrayClick }) => {
         <div className="gameStatus_under"></div>
         <div className="gameStatus">
           <div className='gameStatus_wrapper'>
-          <h1>YOU WIN!</h1>
+          <h1>ПОБЕДА-А-А-А-АААА!</h1>
 				  <div className="btn btn-info m-4" onClick={() => handleWordArrayClick('new')}>Restart</div>
           </div>
           

@@ -9,7 +9,7 @@ const Noword = ({ wordArray, handleWordArrayClick }) => {
         <div className="noWord_under"></div>
         <div className="noWord" onClick={()=> handleWordArrayClick('noMistake')}>
           <div className='noWord_wrapper'>
-            <h1>No such word!</h1>
+            <h1>НЕТ ТАКОГО СЛОВА!</h1>
             <div className="btn btn-info m-4" >CONTINUE</div>
           </div>
         </div>
