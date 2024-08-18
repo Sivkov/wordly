@@ -11,7 +11,7 @@ const Loose = ({ wordArray, handleWordArrayClick }) => {
           <h1 className="text-black">ТЫ ПРОИГРАЛ! ПОПРОБУЙ ЕЩЕ!</h1>
           <h1 className="text-black">ПРАВИЛЬНЫЙ ОТВЕТ:</h1>
           <h1 className="text-black">{wordArray.KEYWORD}</h1>
-				  <div className="btn btn-info m-4" onClick={() => handleWordArrayClick('new')}>Restart</div>
+				  <div className="btn btn-info m-4" onClick={() => handleWordArrayClick('new')}>Рестарт</div>
           </div>
         </div>
         </div>

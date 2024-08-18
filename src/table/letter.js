@@ -5,7 +5,7 @@ const Letter = ({ content, index, bulls, cows }) => {
   const hasCows = cows.includes(index);
   const hasBulls = bulls.includes(index);
 
-  let classNames = 'letter';
+  let classNames = 'letter flip-card letterContainer';
   if (content.length) {
     classNames += ' used';
   }
@@ -18,9 +18,18 @@ const Letter = ({ content, index, bulls, cows }) => {
 
   return (
     <div className={classNames}>
-      {content}
+      <div className="flip-card-inner">
+        <div className="flip-card-back cardLetter">
+          <div>{content}</div>
+        </div>
+        <div className="flip-card-front cardLetter">
+          <div>{content}</div>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default Letter;
+
+

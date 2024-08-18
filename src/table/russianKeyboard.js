@@ -58,6 +58,11 @@ const RussianKeyboard = ({ wordArray, handleWordArrayClick }) => {
           onClick={() => handleWordArrayClick('submit')}>
           ответ
         </button>
+        <button
+          className="keyboard-key btn_del"
+          onClick={() => handleWordArrayClick('clue')}>
+          подсказка
+        </button>
       </div>
     </div>
 

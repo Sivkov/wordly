@@ -12,22 +12,6 @@ const Field = () => {
   const [KEYWORD, setKEYWORD] = useState('');
   const [GAMESTATUS, setGAMESTATUS] = useState('new');
 
- /* useEffect(() => {
-    if (!KEYWORD || GAMESTATUS === 'new') {
-      const url = `${constants.URL}/get_word/${constants.LETTERS}`;
-      axios
-        .get(url)
-        .then(response => {
-          setKEYWORD(response.data.word);
-          console.log('Word is:', response.data.word);
-          setGAMESTATUS('fetched');
-        })
-        .catch(error => {
-          console.error('Error:', error.message);
-        });
-    }
-  }, [KEYWORD, GAMESTATUS]);*/
-
 	const initialWordArray = Array.from({ length: constants.ATTEMPTS }, (i, ind) => {
 		return {
 		  word: Array.from({ length: constants.LETTERS }, () => ''),
@@ -177,6 +161,11 @@ const Field = () => {
 			updatedWordArray.MISTAKE=false
 			setWordArray(updatedWordArray);			
 
+		}  else if (action === 'clue') {
+			const updatedWordArray = { ...wordArray };
+			updatedWordArray.MISTAKE=false
+			setWordArray(updatedWordArray);			
+
 		}
 
 	};
@@ -229,7 +218,7 @@ const Field = () => {
 	return (
 		<div>
 			<div className='d-flex justify-content-center'>
-				<div className="btn btn-info m-4" onClick={() => handleWordArrayClick('new')}>Restart</div>
+				<div className="btn btn-info m-4" onClick={() => handleWordArrayClick('new')}>Рестарт</div>
  			</div>
 			{wordArray.ATTEMPTS.map((word, index) => (
 				<Row key={index} word={word} />

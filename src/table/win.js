@@ -1,5 +1,7 @@
 import React from 'react';
 import Confetti from './confetti';
+import Player from './player';
+
 
 const Win = ({ wordArray, handleWordArrayClick }) => {
   return (
@@ -9,9 +11,10 @@ const Win = ({ wordArray, handleWordArrayClick }) => {
         <div className="gameStatus_under"></div>
         <div className="gameStatus">
           <Confetti />
+          <Player  wordArray={wordArray} />
           <div className='gameStatus_wrapper'>
           <h1>ПОБЕДА!</h1>
-				  <div className="btn btn-info m-4" onClick={() => handleWordArrayClick('new')}>Restart</div>
+				  <div className="btn btn-info m-4" onClick={() => handleWordArrayClick('new')}>Рестарт</div>
           </div>          
         </div>
         </div>

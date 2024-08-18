@@ -54,8 +54,6 @@ code {
   background-color: rgb(25, 231, 43);
 }
 
-
-
 .btn {
   display: inline-block;
   margin-bottom: 0;
@@ -78,7 +76,7 @@ code {
   user-select: none;
 }
 
-.btn_restart {
+.btn_Рестарт {
   color: #fff;
   background-color: #5bc0de;
   border-color: #46b8da;
@@ -168,48 +166,55 @@ code {
   opacity: 0.75;
 }
 
+.letterContainer {
+  perspective: 1000px;
+  font-family: Helvetica, Arial;
+  font-size: 3rem;
+}
 
-/* cardLetter  */
+/*********/
 
-.cardLetter {
-  perspective: 150rem;
+.flip-card {
+  background-color: transparent;
+  width: 75px;
+  height: 75px;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
   position: relative;
-  height: 40rem;
-  max-width: 400px;
-  margin: 2rem;
-  box-shadow: none;
-  background: none;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
-.cardLetter-side {
-  height: 35rem;
-  border-radius: 15px;
-  transition: all 0.8s ease;
-  backface-visibility: hidden;
+.usedAttempt  .flip-card .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+
+.usedAttempt .flip-card-front {
+  background-color: #bbb;
+  color: #bbb;
+}
+
+.flip-card-front, .flip-card-back {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 80%;
-  padding: 2rem;
-  color: white;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
-.cardLetter-side.back {
-  transform: rotateX(-180deg);
-  background-color: #4158D0;
-  background-image: linear-gradient(43deg, #4158D0 0%,#C850C0 46%, #FFCC70 100%);
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
 }
 
-.cardLetter-side.front {
-  background-color: #0093E9;
-  background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+.flip-card-back {
+  /*background-color: #2980b9; */ 
+  transform: rotateY(180deg);
 }
-
-.cardLetter:hover .cardLetter-side.front {
-  transform: rotateX(180deg);
-}
-
-.cardLetter:hover .cardLetter-side.back {
-  transform: rotateX(0deg);
-}
-/* cardLetter  */
