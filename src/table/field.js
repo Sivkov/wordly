@@ -37,7 +37,10 @@ const Field = () => {
 	
 	  const getWord = () => {
 		const url = `${constants.URL}/get_word/${constants.LETTERS}`;
-		axios
+		const newKeyword = getRandomIndex ()
+		console.log('Word is: ' + newKeyword);
+		setWordArray((prev) => ({ ...prev, KEYWORD: newKeyword, GAME: 'ON' }));
+		/*axios
 		.get(url)
 		.then((response) => {
 			const newKeyword = response.data.word.toUpperCase();
@@ -46,8 +49,25 @@ const Field = () => {
 		})
 		.catch((error) => {
 			console.error('Error:', error.message);
-		});
+		});*/
 	};
+
+
+	const getRandomIndex = ()=> {
+			
+		let usedIndexes = JSON.parse(localStorage.getItem('used')) || []; 
+		let random;
+	
+		do {
+			random = Math.floor(Math.random() * constants.WORDS.length); 
+		} while (usedIndexes.includes(random)); 
+	
+		
+		usedIndexes.push(random);
+		localStorage.setItem('used', JSON.stringify(usedIndexes)); 
+	
+		return constants.WORDS[random].toUpperCase();; 
+	}
 	
 
 
@@ -114,11 +134,12 @@ const Field = () => {
 				return
 			}
  			let check = updatedWordArray.ATTEMPTS[emptyWordIndex].word.join('').toLowerCase()
-			const url = `${constants.URL}/check_word/${check}`;
-			axios
+			//const url = `${constants.URL}/check_word/${check}`;
+			//console.log (url)
+			/*axios
 			.get(url)
-			.then((response) => {
- 				if (response.data.word) {
+			.then((response) => {*/
+ 				if ( constants.WORDS.indexOf(check) !== -1) {
 					let bulls=''
 					if (emptyWordIndex !== -1 && updatedWordArray.GAME === "ON") {
 						bulls = getBulls(updatedWordArray.ATTEMPTS[emptyWordIndex].word) 
@@ -142,20 +163,19 @@ const Field = () => {
 						 } else if ( updatedWordArray.ATTEMPTS[constants.ATTEMPTS-1].status === 'used' ) {
 							updatedWordArray.GAME = 'LOOSE'
 						}
-					}				
-
+					}	
+					setWordArray(updatedWordArray);			
 				} else {
 					updatedWordArray.ATTEMPTS[emptyWordIndex].word=Array.from({ length: constants.LETTERS }, () => '')
 					updatedWordArray.MISTAKE=true
 				}
-
 				console.log (updatedWordArray);
 				setWordArray(updatedWordArray);			
 				
-			})
+			/*})
 			.catch((error) => {
 				console.log (error)			
-			});
+			});*/
 		} else if (action === 'noMistake') {
 			const updatedWordArray = { ...wordArray };
 			updatedWordArray.MISTAKE=false
@@ -165,9 +185,7 @@ const Field = () => {
 			const updatedWordArray = { ...wordArray };
 			updatedWordArray.MISTAKE=false
 			setWordArray(updatedWordArray);			
-
 		}
-
 	};
 
 	const getCows = (word) => {
