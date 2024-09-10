@@ -42,10 +42,11 @@ const RussianKeyboard = ({ wordArray, handleWordArrayClick }) => {
 		<div>
 			<div className="russian-keyboard">
 				{russianLetters.map((letters, ind) => (
-					<div className="lettersLine">
+					<div className="lettersLine" 
+						key={ind}>
 						{letters.map((letter, index) => (
 							<button
-								key={ind+index}
+								key={ind+''+index}
 								className={rClass(letter)}
 								onClick={() => handleWordArrayClick('addLetter', letter)}>
 								{letter}

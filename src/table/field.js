@@ -220,6 +220,11 @@ const Field = () => {
 
 		  } else if (keyPressed === "enter") {
  			handleWordArrayClick('submit')
+		  } else if ( (/^[a-z]$/.test(keyPressed) && wordArray.GAME !== 'WIN')) {
+
+			let rusPressed =constants.qwertyMap[keyPressed.toLowerCase()] 
+			handleWordArrayClick('addLetter', rusPressed.toUpperCase())
+			handleWordArrayClick('submit')
 		  } 
 
 		},[wordArray]

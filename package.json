@@ -2,7 +2,7 @@
   "name": "flask_react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://0.0.0.0:44444/react",
+  "homepage": "/wordly",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.2",
     "@testing-library/jest-dom": "^5.16.4",
@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "BUILD_PATH='/home/woodver/woodversrv/app/templates/react' react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
