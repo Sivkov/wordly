@@ -58,11 +58,6 @@ const RussianKeyboard = ({ wordArray, handleWordArrayClick }) => {
 			<div className='d-flex justify-content-center align-items-center mt-2'>
 				<button
 					className="keyboard-key btn_del"
-					onClick={() => handleWordArrayClick('deleteLetter')}>
-					&#9003;
-				</button>
-				<button
-					className="keyboard-key btn_del"
 					onClick={() => handleWordArrayClick('submit')}>
 					ответ
 				</button>
@@ -70,6 +65,11 @@ const RussianKeyboard = ({ wordArray, handleWordArrayClick }) => {
 					className="keyboard-key btn_del"
 					onClick={() => handleWordArrayClick('clue')}>
 					подсказка
+				</button>
+				<button
+					className="keyboard-key btn_del"
+					onClick={() => handleWordArrayClick('deleteLetter')}>
+					&#9003;
 				</button>
 			</div>
 		</div>

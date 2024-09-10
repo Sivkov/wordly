@@ -1,3 +1,21 @@
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh; /* 100% от высоты экрана */
+  width: 100vw;  /* 100% от ширины экрана */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -222,9 +240,119 @@ code {
 .flip-card-front {
   background-color: #bbb;
   color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .flip-card-back {
-  /*background-color: #2980b9; */ 
-  transform: rotateY(180deg);
+   transform: rotateY(180deg);
 }
+
+
+/******************************************************************/
+/* Основные стили для десктопа остаются такими же */
+
+
+
+@media (min-width: 1025px) and (max-width: 1980px) {
+
+  .App {
+    background-color: red !important;
+    color: red !important;
+  }
+  
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .App {
+    background-color: orange !important;
+    color: orange !important;
+  }
+}
+ 
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  .App {
+    background-color: brown !important;
+    color: brown !important;
+  }
+} 
+
+
+@media (min-width: 320px) and (max-width: 767px) {
+
+  .App {
+    background-color: purple !important;
+    color: purple !important;
+  }
+
+  .letter {
+    width: 70px;
+    height: 70px;
+    font-size: 2rem;
+  }
+
+  .flip-card {
+    width: 50px;
+    height: 50px;
+  }
+
+  .russian-keyboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: fit-content;
+    margin: 0 auto;
+  }
+  
+  .keyboard-key {
+    width: calc((100% - 10px) / 12);
+    height: calc((100% - 10px) / 12);
+    min-width: 20px;
+    min-height: 20px;
+  }
+
+  .keyboard-key {
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+  }
+
+  .russian-keyboard {
+    max-width: 100%;
+    margin-top: 3em;
+  }
+
+  .btn {
+    padding: 3px 8px;
+    font-size: 10px;
+  }
+
+  .btn_del {
+    width: 80px;
+  }
+
+  .letterContainer {
+    font-size: 1.5rem;
+  }
+
+  .noWord,
+  .gameStatus {
+    font-size: 1rem;
+  }
+}
+
+
+@media (min-width: 100px) and (max-width: 319px) {
+
+  .App {
+    background-color: pink !important;
+    color: pink !important;
+  }
+}
+
+
+

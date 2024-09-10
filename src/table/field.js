@@ -239,7 +239,7 @@ const Field = () => {
 	  
 
 	return (
-		<div>
+		<div id="field">
 			<div className='d-flex justify-content-center'>
 				<div className="btn btn-info m-4" onClick={() => handleWordArrayClick('new')}>Рестарт</div>
  			</div>
