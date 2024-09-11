@@ -42,34 +42,33 @@ const RussianKeyboard = ({ wordArray, handleWordArrayClick }) => {
 		<div>
 			<div className="russian-keyboard">
 				{russianLetters.map((letters, ind) => (
-					<div className="lettersLine" 
-						key={ind}>
+					<div className="lettersLine" key={ind}>
 						{letters.map((letter, index) => (
+						<React.Fragment key={ind + '' + index}>
 							<button
-								key={ind+''+index}
-								className={rClass(letter)}
-								onClick={() => handleWordArrayClick('addLetter', letter)}>
-								{letter}
+							className={rClass(letter)}
+							onClick={() => handleWordArrayClick('addLetter', letter)}
+							>
+							{letter}
 							</button>
-            			))}
+							{letter === 'Ю' ? 
+								<button
+								className="keyboard-key btn_del"
+								onClick={() => handleWordArrayClick('deleteLetter')}>
+								&#9003;
+								</button> : ''
+							}
+						</React.Fragment>
+						))}
 					</div>
-				))}
+					))
+				}
 			</div>
 			<div className='d-flex justify-content-center align-items-center mt-2'>
 				<button
-					className="keyboard-key btn_del"
+					className="keyboard-key btn_answer"
 					onClick={() => handleWordArrayClick('submit')}>
 					ответ
-				</button>
-				<button
-					className="keyboard-key btn_del"
-					onClick={() => handleWordArrayClick('clue')}>
-					подсказка
-				</button>
-				<button
-					className="keyboard-key btn_del"
-					onClick={() => handleWordArrayClick('deleteLetter')}>
-					&#9003;
 				</button>
 			</div>
 		</div>

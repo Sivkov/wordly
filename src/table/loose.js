@@ -8,10 +8,11 @@ const Loose = ({ wordArray, handleWordArrayClick }) => {
         <div className="gameStatus_under"></div>
         <div className="gameStatus">
           <div className='gameStatus_wrapper'>
-          <h1 className="text-black">ТЫ ПРОИГРАЛ! ПОПРОБУЙ ЕЩЕ!</h1>
+          <h1 className="text-black">НЕ В ЭТОТ РАЗ!</h1>
+          <h1 className="text-black">ПОПРОБУЙ ЕЩЕ!</h1>
           <h1 className="text-black">ПРАВИЛЬНЫЙ ОТВЕТ:</h1>
           <h1 className="text-black">{wordArray.KEYWORD}</h1>
-				  <div className="btn btn-info m-4" onClick={() => handleWordArrayClick('new')}>Рестарт</div>
+				  <div className="btn btn-secondary m-4" onClick={() => handleWordArrayClick('new')}>Рестарт</div>
           </div>
         </div>
         </div>

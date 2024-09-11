@@ -14,7 +14,7 @@ const Win = ({ wordArray, handleWordArrayClick }) => {
           <Player  wordArray={wordArray} />
           <div className='gameStatus_wrapper'>
           <h1>ПОБЕДА!</h1>
-				  <div className="btn btn-info m-4" onClick={() => handleWordArrayClick('new')}>Рестарт</div>
+				  <div className="btn btn-secondary m-4" onClick={() => handleWordArrayClick('new')}>Рестарт</div>
           </div>          
         </div>
         </div>

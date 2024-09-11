@@ -220,11 +220,9 @@ const Field = () => {
 
 		  } else if (keyPressed === "enter") {
  			handleWordArrayClick('submit')
-		  } else if ( (/^[a-z]$/.test(keyPressed) && wordArray.GAME !== 'WIN')) {
-
+		  } else if ( (/^[a-z\.,\[\]\';]$/.test(keyPressed) && wordArray.GAME !== 'WIN')) {
 			let rusPressed =constants.qwertyMap[keyPressed.toLowerCase()] 
 			handleWordArrayClick('addLetter', rusPressed.toUpperCase())
-			handleWordArrayClick('submit')
 		  } 
 
 		},[wordArray]
@@ -241,7 +239,7 @@ const Field = () => {
 	return (
 		<div id="field">
 			<div className='d-flex justify-content-center'>
-				<div className="btn btn-info m-4" onClick={() => handleWordArrayClick('new')}>Рестарт</div>
+				<div className="btn btn-secondary m-4" onClick={() => handleWordArrayClick('new')}>Рестарт</div>
  			</div>
 			{wordArray.ATTEMPTS.map((word, index) => (
 				<Row key={index} word={word} />
