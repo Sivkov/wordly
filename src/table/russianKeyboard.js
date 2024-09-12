@@ -1,7 +1,5 @@
 import React from 'react';
 
-
-
 const RussianKeyboard = ({ wordArray, handleWordArrayClick }) => {
 	const russianLetters = [
 		["Й", "Ц", "У", "К", "Е", "Н", "Г", "Ш", "Щ", "З", "Х", "Ъ"], // первая строка

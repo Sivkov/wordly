@@ -101,12 +101,6 @@ code {
   user-select: none;
 }
 
-.btn_Рестарт {
-  color: #fff;
-  background-color: #5bc0de;
-  border-color: #46b8da;
-}
-
 .btn_submit {
   color: #fff;
   background-color: #5bc0de;
@@ -287,6 +281,10 @@ code {
     min-height: 40px;
 
   }
+
+  .btn_answer {
+    width: calc(100vw / 3 );
+   }
   
 }
 
@@ -379,3 +377,37 @@ code {
 
 
  */
+
+ #upperNav {
+  height: 10vh;
+ }
+
+ .side-panel {
+  position: fixed;             /* Фиксируем панель на экране */
+  bottom: 0;                   /* Располагаем панель снизу */
+  left: 0;                     /* Ставим панель от левого края */
+  width: 100%;                 /* Занимаем всю ширину экрана */
+  height: calc(100% - 10vh);  /* Высота панели = 100% высоты экрана минус 60px для кнопок */
+  background-color: rgba(0, 0, 0, 0.8);  /* Полупрозрачный черный фон */
+  z-index: 1000;               /* Размещаем поверх всех элементов */
+  display: flex;               /* Используем flex для центрирования контента */
+  justify-content: center;     /* Центрируем по горизонтали */
+  align-items: center;         /* Центрируем по вертикали */
+  color: white;                /* Цвет текста */
+  transition: transform 1s ease-in-out;  /* Анимация открытия-закрытия */
+  transform: translateY(100%); /* Скрываем панель по умолчанию */
+}
+
+.side-panel.show {
+  transform: translateY(0);    /* Показываем панель */
+}
+
+.side-panel-content {
+  background-color: white;     /* Белый фон для контента */
+  padding: 20px;               /* Внутренние отступы */
+  border-radius: 10px;         /* Скругленные углы */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Тень для контента */
+  color: black;                /* Цвет текста */
+  width: 90%;                  /* Ширина контента */
+  max-width: 600px;            /* Максимальная ширина контента */
+}

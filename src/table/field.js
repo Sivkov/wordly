@@ -5,12 +5,13 @@ import Loose from './loose';
 import Noword from './noword';
 import constants from '../constants/constants';
 import RussianKeyboard from '../table/russianKeyboard';
+import UpperNav from '../table/upperNav.js'
 
-const axios = require('axios');
+//const axios = require('axios');
  
 const Field = () => {
   const [KEYWORD, setKEYWORD] = useState('');
-  const [GAMESTATUS, setGAMESTATUS] = useState('new');
+  //const [GAMESTATUS, setGAMESTATUS] = useState('new');
 
 	const initialWordArray = Array.from({ length: constants.ATTEMPTS }, (i, ind) => {
 		return {
@@ -36,9 +37,10 @@ const Field = () => {
 	  }, [wordArray.GAME, wordArray.KEYWORD]);
 	
 	  const getWord = () => {
-		const url = `${constants.URL}/get_word/${constants.LETTERS}`;
+		//const url = `${constants.URL}/get_word/${constants.LETTERS}`;
 		const newKeyword = getRandomIndex ()
 		console.log('Word is: ' + newKeyword);
+		setKEYWORD(newKeyword)
 		setWordArray((prev) => ({ ...prev, KEYWORD: newKeyword, GAME: 'ON' }));
 		/*axios
 		.get(url)
@@ -224,7 +226,6 @@ const Field = () => {
 			let rusPressed =constants.qwertyMap[keyPressed.toLowerCase()] 
 			handleWordArrayClick('addLetter', rusPressed.toUpperCase())
 		  } 
-
 		},[wordArray]
 	  );
 	  
@@ -238,9 +239,7 @@ const Field = () => {
 
 	return (
 		<div id="field">
-			<div className='d-flex justify-content-center'>
-				<div className="btn btn-secondary m-4" onClick={() => handleWordArrayClick('new')}>Рестарт</div>
- 			</div>
+			<UpperNav handleWordArrayClick={handleWordArrayClick}/>
 			{wordArray.ATTEMPTS.map((word, index) => (
 				<Row key={index} word={word} />
 			))}
