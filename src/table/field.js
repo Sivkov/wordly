@@ -6,6 +6,8 @@ import Noword from './noword';
 import constants from '../constants/constants';
 import RussianKeyboard from '../table/russianKeyboard';
 import UpperNav from '../table/upperNav.js'
+import { useGameContext } from './gameContext.js';
+
 
 //const axios = require('axios');
  
@@ -77,7 +79,7 @@ const Field = () => {
 			console.log ("***New")
 			//getWord()
 			setWordArray({ ATTEMPTS: initialWordArray, KEYWORD: KEYWORD, GAME: initGameStatus });
-
+			
 		} else if (action === 'addLetter') {
 			console.log ("***Add letter")
 			const updatedWordArray = { ...wordArray };
@@ -159,8 +161,25 @@ const Field = () => {
 							};
 						}
 						if (bulls.length  ===  5 ) {
-							 updatedWordArray.GAME = 'WIN'
+
+							let updAttempts = gameData.attempts
+							updAttempts[Number(emptyWordIndex)]+=1
+
+							 setGameData({
+								games: gameData.games+1,
+								wins: gameData.wins+1,
+								winChain: gameData.winChain+1,
+								attempts: updAttempts
+							  });
+							  updatedWordArray.GAME = 'WIN'
+
 						 } else if ( updatedWordArray.ATTEMPTS[constants.ATTEMPTS-1].status === 'used' ) {
+							setGameData({
+								games: gameData.games+1,
+								wins: gameData.wins,
+								winChain: 0,
+								attempts: gameData.attempts
+							  });
 							updatedWordArray.GAME = 'LOOSE'
 						}
 					}	
@@ -198,7 +217,7 @@ const Field = () => {
 		return res;
 	};
 
-	const getBulls = (word = 'assam') => {
+	const getBulls = (word) => {
 		let res = []
 		word.map((letter, ind) => {
 			if (wordArray.KEYWORD[ind] === letter.toUpperCase()) {
@@ -233,6 +252,9 @@ const Field = () => {
 		window.removeEventListener('keydown', handleKeyPress);
 	};
 	}); 
+
+	const { gameData, setGameData } = useGameContext(); 
+
 	  
 
 	return (

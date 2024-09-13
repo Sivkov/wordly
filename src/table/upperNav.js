@@ -8,12 +8,12 @@ const UpperNav = ({ handleWordArrayClick }) => {
     const [showStatisticPanel, setShowStatisticPanel] = useState(false);
     const { gameData, setGameData } = useGameContext(); 
 
-     const clearStatistic = () => {
+    const clearStatistic = () => {
        setGameData({
         games: 0,
         wins: 0,
         winChain: 0,
-        attempts: Array(constants.ATTEMPTS).fill(0)
+        attempts: Array(Number(constants.ATTEMPTS)).fill(0)
       });
     };
 
