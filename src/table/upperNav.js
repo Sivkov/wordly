@@ -1,8 +1,21 @@
 import React, { useState } from 'react';
+import { useGameContext } from './gameContext.js';
+import constants from '../constants/constants';
+
 
 const UpperNav = ({ handleWordArrayClick }) => {
     const [showQuestionPanel, setShowQuestionPanel] = useState(false);
     const [showStatisticPanel, setShowStatisticPanel] = useState(false);
+    const { gameData, setGameData } = useGameContext(); 
+
+     const clearStatistic = () => {
+       setGameData({
+        games: 0,
+        wins: 0,
+        winChain: 0,
+        attempts: Array(constants.ATTEMPTS).fill(0)
+      });
+    };
 
     const handleIconClick = (value) => {
         if (value === 'question') {
@@ -34,21 +47,36 @@ const UpperNav = ({ handleWordArrayClick }) => {
             </div>
 
             {showQuestionPanel && (
-                <div className={`side-panel ${showQuestionPanel ? 'show' : ''}`}>
+                <div className={`side-panel-question side-panel ${showQuestionPanel ? 'show' : ''}`}>
                     <div className="side-panel-content">
-                        <h2>Вопрос</h2>
-                        <p>Здесь можно отобразить информацию, связанную с вопросом.</p>
+                        <h2>Как играть ?</h2>
+                        <p>У вас шесть попыток чтобы угадать слово</p>
+                        <p>Если буква встречается в загаданном слове</p>
+                        <p>она будет подсвечена розовым на клавиатуре и на поле</p>
+                        <p>Если буква встречается в слове </p>
+                        <p>и стоит на том же месте в занаданном слове</p>
+                        <p>она будет подсвечена зелёным</p>
                         <button onClick={() => setShowQuestionPanel(false)}>Закрыть</button>
                     </div>
                 </div>
             )}
 
             {showStatisticPanel && (
-                <div className={`side-panel ${showStatisticPanel ? 'show' : ''}`}>
+                <div className={`side-panel-statistic side-panel ${showStatisticPanel ? 'show' : ''}`}>
                     <div className="side-panel-content">
-                        <h2>Статистика</h2>
-                        <p>Здесь можно отобразить статистические данные.</p>
-                        <button onClick={() => setShowStatisticPanel(false)}>Закрыть</button>
+                        <h2>Статистика игр</h2>
+                        <p>Сыграно игр:{gameData.games}</p>
+                        <p>Количество побед:{gameData.wins}</p>
+                        <p>Текущая серия побед:{gameData.winChain}</p>
+                        {
+                            gameData.attempts.map((element,ind) => (
+                                <p key={ind}>Отгадано с {ind+1} попытки:{element}</p>
+                            ))
+                        }
+                        <div className ="d-flex justify-content-between">
+                            <button onClick={() => clearStatistic()}>Обнулить</button>
+                            <button onClick={() => setShowStatisticPanel(false)}>Закрыть</button>
+                        </div>                       
                     </div>
                 </div>
             )}

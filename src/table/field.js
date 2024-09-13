@@ -70,8 +70,6 @@ const Field = () => {
 	
 		return constants.WORDS[random].toUpperCase();; 
 	}
-	
-
 
 	const handleWordArrayClick = (action , keyPressed = '') => {
 		console.log ('handleWordArrayClick '+ action)
@@ -229,12 +227,12 @@ const Field = () => {
 		},[wordArray]
 	  );
 	  
-	  useEffect(() => {
-		window.addEventListener('keydown', handleKeyPress);
-		return () => {
-		  window.removeEventListener('keydown', handleKeyPress);
-		};
-	  }); 
+	useEffect(() => {
+	window.addEventListener('keydown', handleKeyPress);
+	return () => {
+		window.removeEventListener('keydown', handleKeyPress);
+	};
+	}); 
 	  
 
 	return (

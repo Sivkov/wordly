@@ -383,31 +383,54 @@ code {
  }
 
  .side-panel {
-  position: fixed;             /* Фиксируем панель на экране */
-  bottom: 0;                   /* Располагаем панель снизу */
-  left: 0;                     /* Ставим панель от левого края */
-  width: 100%;                 /* Занимаем всю ширину экрана */
-  height: calc(100% - 10vh);  /* Высота панели = 100% высоты экрана минус 60px для кнопок */
-  background-color: rgba(0, 0, 0, 0.8);  /* Полупрозрачный черный фон */
-  z-index: 1000;               /* Размещаем поверх всех элементов */
-  display: flex;               /* Используем flex для центрирования контента */
-  justify-content: center;     /* Центрируем по горизонтали */
-  align-items: center;         /* Центрируем по вертикали */
-  color: white;                /* Цвет текста */
-  transition: transform 1s ease-in-out;  /* Анимация открытия-закрытия */
-  transform: translateY(100%); /* Скрываем панель по умолчанию */
+  position: fixed;            
+  bottom: 0;                  
+  left: 0;                    
+  width: 100%;                
+  height: calc(100% - 10vh);  
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;              
+  display: flex;              
+  justify-content: center;    
+  align-items: center;        
+  color: white;                
+  transform: translateX(100%);  
 }
 
-.side-panel.show {
-  transform: translateY(0);    /* Показываем панель */
-}
-
+ 
 .side-panel-content {
-  background-color: white;     /* Белый фон для контента */
-  padding: 20px;               /* Внутренние отступы */
-  border-radius: 10px;         /* Скругленные углы */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Тень для контента */
-  color: black;                /* Цвет текста */
-  width: 90%;                  /* Ширина контента */
-  max-width: 600px;            /* Максимальная ширина контента */
+  background-color: white;   
+  padding: 20px;              
+  border-radius: 10px;        
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+  color: black;              
+  width: 90%;                 
+  max-width: 600px;           
+}
+
+.side-panel-question.show {
+  animation: sun-rise-left 0.5s ease-in-out forwards;  /* Анимация с сохранением финального состояния */
+}
+
+.side-panel-statistic.show {
+  animation: sun-rise-right 0.5s ease-in-out forwards;  /* Анимация с сохранением финального состояния */
+}
+
+@keyframes sun-rise-right {
+  from {
+    transform: translateX(100%);  /* Начальное положение (скрыто) */
+  }
+  to {
+    transform: translateX(0);  /* Конечное положение (видимо) */
+  }
+}
+
+
+@keyframes sun-rise-left {
+  from {
+    transform: translateX(-100%);  /* Начальное положение (скрыто) */
+  }
+  to {
+    transform: translateX(0);  /* Конечное положение (видимо) */
+  }
 }
