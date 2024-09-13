@@ -13,7 +13,7 @@ import { useGameContext } from './gameContext.js';
  
 const Field = () => {
   const [KEYWORD, setKEYWORD] = useState('');
-  //const [GAMESTATUS, setGAMESTATUS] = useState('new');
+  const [GAMESTATUS, setGAMESTATUS] = useState('new');
 
 	const initialWordArray = Array.from({ length: constants.ATTEMPTS }, (i, ind) => {
 		return {
@@ -39,21 +39,10 @@ const Field = () => {
 	  }, [wordArray.GAME, wordArray.KEYWORD]);
 	
 	  const getWord = () => {
-		//const url = `${constants.URL}/get_word/${constants.LETTERS}`;
 		const newKeyword = getRandomIndex ()
 		console.log('Word is: ' + newKeyword);
 		setKEYWORD(newKeyword)
 		setWordArray((prev) => ({ ...prev, KEYWORD: newKeyword, GAME: 'ON' }));
-		/*axios
-		.get(url)
-		.then((response) => {
-			const newKeyword = response.data.word.toUpperCase();
-			console.log('Word is: ' + newKeyword);
-			setWordArray((prev) => ({ ...prev, KEYWORD: newKeyword, GAME: 'ON' }));
-		})
-		.catch((error) => {
-			console.error('Error:', error.message);
-		});*/
 	};
 
 
@@ -65,11 +54,9 @@ const Field = () => {
 		do {
 			random = Math.floor(Math.random() * constants.WORDS.length); 
 		} while (usedIndexes.includes(random)); 
-	
 		
 		usedIndexes.push(random);
 		localStorage.setItem('used', JSON.stringify(usedIndexes)); 
-	
 		return constants.WORDS[random].toUpperCase();; 
 	}
 
@@ -77,8 +64,8 @@ const Field = () => {
 		console.log ('handleWordArrayClick '+ action)
 		if (action === 'new') {
 			console.log ("***New")
-			//getWord()
 			setWordArray({ ATTEMPTS: initialWordArray, KEYWORD: KEYWORD, GAME: initGameStatus });
+			getWord()
 			
 		} else if (action === 'addLetter') {
 			console.log ("***Add letter")
