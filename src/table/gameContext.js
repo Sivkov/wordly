@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import constants from '../constants/constants';
+
 
  const GameContext = createContext();
 
@@ -7,7 +9,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
     games: 0,
     wins: 0,
     winChain: 0,
-    attempts: [0, 0, 0, 0, 0]
+    attempts: Array(Number(constants.ATTEMPTS)).fill(0)
   });
 
   // Функция для получения данных из localStorage
@@ -16,7 +18,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
     if (savedData) {
       return JSON.parse(savedData);
     } else {
-      return { games: 0, wins: 0, winChain: 0, attempts: [0, 0, 0, 0, 0] };
+      return { games: 0, wins: 0, winChain: 0, attempts: Array(Number(constants.ATTEMPTS)).fill(0) };
     }
   };
 
