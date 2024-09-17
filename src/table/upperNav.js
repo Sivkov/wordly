@@ -4,8 +4,8 @@ import constants from '../constants/constants';
 
 
 const UpperNav = ({ handleWordArrayClick }) => {
-    const [showQuestionPanel, setShowQuestionPanel] = useState(false);
-    const [showStatisticPanel, setShowStatisticPanel] = useState(false);
+    const [showQuestionPanel, setShowQuestionPanel] = useState('none');
+    const [showStatisticPanel, setShowStatisticPanel] = useState('none');
     const { gameData, setGameData } = useGameContext(); 
 
     const clearStatistic = () => {
@@ -19,11 +19,12 @@ const UpperNav = ({ handleWordArrayClick }) => {
 
     const handleIconClick = (value) => {
         if (value === 'question') {
-            setShowQuestionPanel(!showQuestionPanel);
-            setShowStatisticPanel(false);
+            setShowQuestionPanel( showQuestionPanel==='hide' || showQuestionPanel==='none' ? 'show' : 'hide');
+            if (showStatisticPanel === 'show' || showQuestionPanel === 'show') setShowStatisticPanel('hide');
+
         } else if (value === 'statistic') {
-            setShowStatisticPanel(!showStatisticPanel);
-            setShowQuestionPanel(false);
+            setShowStatisticPanel(showStatisticPanel==='hide'|| showStatisticPanel==='none' ? 'show' : 'hide');
+            if (showStatisticPanel === 'show' || showQuestionPanel === 'show')  setShowQuestionPanel('hide');
         }
     };
 
@@ -47,7 +48,7 @@ const UpperNav = ({ handleWordArrayClick }) => {
             </div>
 
             {showQuestionPanel && (
-                <div className={`side-panel-question side-panel ${showQuestionPanel ? 'show' : ''}`}>
+                <div className={`side-panel-question side-panel ${showQuestionPanel}`}>
                     <div className="side-panel-content">
                         <h2>Как играть ?</h2>
                         <p>У вас шесть попыток чтобы угадать слово</p>
@@ -56,26 +57,39 @@ const UpperNav = ({ handleWordArrayClick }) => {
                         <p>Если буква встречается в слове </p>
                         <p>и стоит на том же месте в занаданном слове</p>
                         <p>она будет подсвечена зелёным</p>
-                        <button onClick={() => setShowQuestionPanel(false)}>Закрыть</button>
+                        <button onClick={() => setShowQuestionPanel('hide')}>Закрыть</button>
                     </div>
                 </div>
             )}
 
             {showStatisticPanel && (
-                <div className={`side-panel-statistic side-panel ${showStatisticPanel ? 'show' : ''}`}>
+                <div className={`side-panel-statistic side-panel ${showStatisticPanel}`}>
                     <div className="side-panel-content">
-                        <h2>Статистика игр</h2>
-                        <p>Сыграно игр:{gameData.games}</p>
-                        <p>Количество побед:{gameData.wins}</p>
-                        <p>Текущая серия побед:{gameData.winChain}</p>
-                        {
+                        <h2 className='text-center'>Статистика:</h2>
+                        <p>Сыграно игр : {gameData.games}</p>
+                        <p>Процент побед : { Math.round  (gameData.wins / gameData.games *1000)/10}%</p>
+                        <p>Текущая серия побед : {gameData.winChain}</p>
+{/*                         {
                             gameData.attempts.map((element,ind) => (
                                 <p key={ind}>Отгадано с {ind+1} попытки:{element}</p>
                             ))
+                        } */}
+                        <h4 >Статистика попыток:</h4>
+                        {
+                            gameData.attempts.map((element,ind) => (
+                                <div className='d-flex flex-row align-items-center'> 
+                                    <div>
+                                        {ind+1}: 
+                                    </div>
+                                    <div className='att_wrapper ms-2 mt-1'>
+                                        <div className='att_info' style={{width: `${ element / gameData.wins * 12 }vw`}}></div>
+                                    </div>
+                                </div>
+                            ))
                         }
-                        <div className ="d-flex justify-content-between">
+                        <div className ="d-flex justify-content-between mt-4">
                             <button onClick={() => clearStatistic()}>Обнулить</button>
-                            <button onClick={() => setShowStatisticPanel(false)}>Закрыть</button>
+                            <button onClick={() => setShowStatisticPanel('hide')}>Закрыть</button>
                         </div>                       
                     </div>
                 </div>
