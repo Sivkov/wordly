@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useGameContext } from './gameContext.js';
 import constants from '../constants/constants';
 
@@ -7,6 +7,8 @@ const UpperNav = ({ handleWordArrayClick }) => {
     const [showQuestionPanel, setShowQuestionPanel] = useState('none');
     const [showStatisticPanel, setShowStatisticPanel] = useState('none');
     const { gameData, setGameData } = useGameContext(); 
+    const [attemptsDisplay, setAttemptsDisplay] = useState([]); 
+
 
     const clearStatistic = () => {
        setGameData({
@@ -17,14 +19,28 @@ const UpperNav = ({ handleWordArrayClick }) => {
       });
     };
 
+    useEffect(() => {
+        const updatedAttemptsDisplay = gameData.attempts.map((element, ind) => (
+            <div key={ind} className='d-flex flex-row align-items-center'> 
+                <div>{ind + 1}:</div>
+                <div className='att_wrapper ms-2 mt-1'>
+                    {/* Проверка деления на ноль */}
+                    <div className='att_info' style={{ width: `${gameData.wins ? element / gameData.wins * 12 : 0}vw` }}></div>
+                </div>
+            </div>
+        ));
+        setAttemptsDisplay(updatedAttemptsDisplay);
+    }, [gameData.attempts, gameData.wins]);
+
+
     const handleIconClick = (value) => {
         if (value === 'question') {
             setShowQuestionPanel( showQuestionPanel==='hide' || showQuestionPanel==='none' ? 'show' : 'hide');
-            if (showStatisticPanel === 'show' || showQuestionPanel === 'show') setShowStatisticPanel('hide');
+            if (showStatisticPanel === 'show') setShowStatisticPanel('hide');
 
         } else if (value === 'statistic') {
             setShowStatisticPanel(showStatisticPanel==='hide'|| showStatisticPanel==='none' ? 'show' : 'hide');
-            if (showStatisticPanel === 'show' || showQuestionPanel === 'show')  setShowQuestionPanel('hide');
+            if (showQuestionPanel === 'show')  setShowQuestionPanel('hide');
         }
     };
 
@@ -57,7 +73,7 @@ const UpperNav = ({ handleWordArrayClick }) => {
                         <p>Если буква встречается в слове </p>
                         <p>и стоит на том же месте в занаданном слове</p>
                         <p>она будет подсвечена зелёным</p>
-                        <button onClick={() => setShowQuestionPanel('hide')}>Закрыть</button>
+                        <button className="btn btn-secondary" onClick={() => setShowQuestionPanel('hide')}>Закрыть</button>
                     </div>
                 </div>
             )}
@@ -67,29 +83,13 @@ const UpperNav = ({ handleWordArrayClick }) => {
                     <div className="side-panel-content">
                         <h2 className='text-center'>Статистика:</h2>
                         <p>Сыграно игр : {gameData.games}</p>
-                        <p>Процент побед : { Math.round  (gameData.wins / gameData.games *1000)/10}%</p>
+                        <p>Процент побед : { gameData.wins ? Math.round  (gameData.wins / gameData.games *1000)/10 : '0'}%</p>
                         <p>Текущая серия побед : {gameData.winChain}</p>
-{/*                         {
-                            gameData.attempts.map((element,ind) => (
-                                <p key={ind}>Отгадано с {ind+1} попытки:{element}</p>
-                            ))
-                        } */}
                         <h4 >Статистика попыток:</h4>
-                        {
-                            gameData.attempts.map((element,ind) => (
-                                <div className='d-flex flex-row align-items-center'> 
-                                    <div>
-                                        {ind+1}: 
-                                    </div>
-                                    <div className='att_wrapper ms-2 mt-1'>
-                                        <div className='att_info' style={{width: `${ element / gameData.wins * 12 }vw`}}></div>
-                                    </div>
-                                </div>
-                            ))
-                        }
+                        {attemptsDisplay}
                         <div className ="d-flex justify-content-between mt-4">
-                            <button onClick={() => clearStatistic()}>Обнулить</button>
-                            <button onClick={() => setShowStatisticPanel('hide')}>Закрыть</button>
+                            <button className="btn btn-secondary" onClick={() => clearStatistic()}>Обнулить</button>
+                            <button className="btn btn-secondary" onClick={() => setShowStatisticPanel('hide')}>Закрыть</button>
                         </div>                       
                     </div>
                 </div>

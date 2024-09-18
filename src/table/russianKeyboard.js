@@ -24,15 +24,27 @@ const RussianKeyboard = ({ wordArray, handleWordArrayClick }) => {
 			if (wordArray.KEYWORD.includes(letter)) lClass += ' usefull'
 		}
 
-		wordArray.ATTEMPTS.forEach(element => {
+/* 		wordArray.ATTEMPTS.forEach(element => {
 			if (element.status === 'used') {
 				let lIndex = wordArray.KEYWORD.indexOf(letter)
 				if (lIndex !== -1 && element.word[lIndex] === letter) {
+
 					lClass += ' usefullOnPlace'
 				}
 			}
+		}); */
+		wordArray.ATTEMPTS.forEach(element => {
+			if (element.status === 'used') { // Проверяем, что попытка уже была использована
+				element.word.forEach((attemptLetter, index) => { 
+					// Проверяем каждую букву слова в данной попытке
+					if (attemptLetter === letter && wordArray.KEYWORD[index] === letter) {
+						// Если буква в попытке совпадает с буквой загаданного слова на той же позиции
+						lClass += ' usefullOnPlace';
+					}
+				});
+			}
 		});
-
+		
 		return lClass
 	}
 

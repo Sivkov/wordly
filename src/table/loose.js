@@ -1,6 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Loose = ({ wordArray, handleWordArrayClick }) => {
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (wordArray.GAME === 'LOOSE' && (event.key === 'Enter' || event.key === ' ')) {
+        handleWordArrayClick('new'); 
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [wordArray, handleWordArrayClick]); 
+
   return (
     <div>
       {wordArray.GAME === 'LOOSE' && (
