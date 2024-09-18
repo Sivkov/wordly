@@ -129,7 +129,14 @@ code {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  filter:drop-shadow(2px -1px 0px grey)
 }
+
+.keyboard-key:active {
+  filter:drop-shadow(1px 1px 1px whitesmoke)
+}
+
+  
 
 /*.keyboard-key:focus {
   outline: none;
@@ -276,7 +283,7 @@ code {
 
   .keyboard-key {
     width: 40px;
-    height: 40px;
+    height: 60px;
     min-width: 40px;
     min-height: 40px;
 

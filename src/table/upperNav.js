@@ -46,7 +46,7 @@ const UpperNav = ({ handleWordArrayClick }) => {
 
     return (
         <div id="upperNav" className='mb-2'>
-            <div className='d-flex align-items-center justify-content-between w-100'>
+            <div key={3} className='d-flex align-items-center justify-content-between w-100'>
                 <div className='mx-2' onClick={() => handleIconClick('question')}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
@@ -64,7 +64,7 @@ const UpperNav = ({ handleWordArrayClick }) => {
             </div>
 
             {showQuestionPanel && (
-                <div className={`side-panel-question side-panel ${showQuestionPanel}`}>
+                <div  className={`side-panel-question side-panel ${showQuestionPanel}`}>
                     <div className="side-panel-content">
                         <h2>Как играть ?</h2>
                         <p>У вас шесть попыток чтобы угадать слово</p>
@@ -79,7 +79,7 @@ const UpperNav = ({ handleWordArrayClick }) => {
             )}
 
             {showStatisticPanel && (
-                <div className={`side-panel-statistic side-panel ${showStatisticPanel}`}>
+                <div key={1} className={`side-panel-statistic side-panel ${showStatisticPanel}`}>
                     <div className="side-panel-content">
                         <h2 className='text-center'>Статистика:</h2>
                         <p>Сыграно игр : {gameData.games}</p>
