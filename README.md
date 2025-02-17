@@ -5,5 +5,5 @@ PetProject : Wordly new Realisation
 *  statistics of games and winnings are 
 *  always Russian keyboard real and virtual 
 *  win sounds and confetti
-### [Try it live](https://sivkov.online/wordly/)
+### [Try it live](https://sivkov.github.io/wordly/)
 ![Screenshot](https://github.com/Sivkov/wordly/blob/master/public/example.png)
