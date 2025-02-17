@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/wordly/static/css/main.d3ca57a4.css",
+    "main.js": "/wordly/static/js/main.70274afb.js",
+    "static/media/2.mp3": "/wordly/static/media/2.ddce60d152e018290fee.mp3",
+    "static/media/1.mp3": "/wordly/static/media/1.99f3527d8594d8910ef1.mp3",
+    "index.html": "/wordly/index.html",
+    "main.d3ca57a4.css.map": "/wordly/static/css/main.d3ca57a4.css.map",
+    "main.70274afb.js.map": "/wordly/static/js/main.70274afb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d3ca57a4.css",
+    "static/js/main.70274afb.js"
+  ]
+}
